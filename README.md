@@ -38,5 +38,5 @@ To have basic understanding of terraform Deployment using Github actions, please
 
 ## Deploy only when push to main branch (deploy.yaml)
 
-We will be applying the changes only when there is a push in the main branch.
+We will be applying the changes only when there is a push in the main branch. 
 
