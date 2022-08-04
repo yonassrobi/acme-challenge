@@ -17,7 +17,7 @@
    project                 = var.project
    region                  = var.region
    app_definitions         = local.app_definitions
-   health_check_path       = "/LoginWebApp-1/"
+   health_check_path       = "/swagger-ui/index.html"
  }
  
 
