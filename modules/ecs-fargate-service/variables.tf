@@ -34,7 +34,7 @@ variable "path" {
 }
 
 variable "port" {
-  default     = 8080
+  default     = 80
   type        = number
   description = "Port the application runs on"
 }
