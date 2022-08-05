@@ -1,3 +1,7 @@
+variable "image_tag" {
+  default     = ""
+  description = "Docker image tag to deploy"
+}
 
 variable "cpu" {
   default     = 512
