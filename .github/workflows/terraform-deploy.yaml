@@ -49,7 +49,7 @@ jobs:
       - name: Build, tag, and push the image to Amazon ECR
         id: build-image
         env:
-          ECR_REGISTRY: 905975536748.dkr.ecr.us-east-1.amazonaws.com/acme-tech-challenge
+          ECR_REGISTRY: 905975536748.dkr.ecr.us-east-1.amazonaws.com
           ECR_REPOSITORY: acme-tech-challenge
         run: |
           # Build a docker container and push it to ECR 
