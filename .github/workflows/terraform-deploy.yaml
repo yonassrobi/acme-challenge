@@ -28,16 +28,17 @@ jobs:
       - uses: actions/checkout@v2
 
       # Push docker container to ecr
-      # - name: Login to Amazon ECR
-      #   id: login-ecr
-      #   uses: aws-actions/amazon-ecr-login@v1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        env: 
+          REGION: us-east-1
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build, tag, and push the image to Amazon ECR
         id: build-image
         env:
           ECR_REGISTRY: 905975536748.dkr.ecr.us-east-1.amazonaws.com/acme-tech-challenge
           ECR_REPOSITORY: acme-tech-challenge
-          #IMAGE_TAG: {{ $(git rev-parse --short "$GITHUB_SHA") }}
         run: |
           # Build a docker container and push it to ECR 
           aws ecr get-login-password --region=$REGION |  docker login --username AWS --password-stdin $(aws sts get-caller-identity --output text --query Account).dkr.ecr.$REGION.amazonaws.com
