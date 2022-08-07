@@ -33,7 +33,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
@@ -45,8 +44,9 @@ jobs:
           ECR_REGISTRY: 905975536748.dkr.ecr.us-east-1.amazonaws.com
           ECR_REPOSITORY: acme-tech-challenge
         run: |
-          # Build a docker container and push it to ECR 
-          export IMAGE_TAG=$(git rev-parse --short "$GITHUB_SHA") 
+          # Build a docker container and push it to ECR
+          export IMAGE_TAG=$(git rev-parse --short "$GITHUB_SHA")
+          ./acme/build-app-properties.sh $DATASOURCE_URL $DATASOURCE_PASSWORD $JWT_HEADER_SECRET
           docker build --quiet -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           echo "Pushing image to ECR..."
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
