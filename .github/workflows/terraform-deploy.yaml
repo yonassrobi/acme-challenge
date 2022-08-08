@@ -63,13 +63,8 @@ jobs:
         run: |
            rm -rf .terraform
            terraform init -backend-config=${{ matrix.environment }}/backend.tfvars -upgrade=true -no-color -input=false
-        uses: ./
-        with: 
-          tf_actions_working_dir: 'terraform/'
       - name: Terraform Plan
         id: plan
-        with: 
-          tf_actions_working_dir: 'terraform/'
         run: |
           export IMAGE_TAG=$(git rev-parse --short "$GITHUB_SHA") 
           terraform plan -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -var "image_tag=$IMAGE_TAG" -no-color 
@@ -82,8 +77,6 @@ jobs:
       - name: Terraform destroy
         if: github.ref == 'refs/heads/destroy'
         id: destroy
-        with: 
-          tf_actions_working_dir: 'terraform/'
         run: |
           export IMAGE_TAG=$(git rev-parse --short "$GITHUB_SHA")  
           terraform destroy -auto-approve -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -var "image_tag=$IMAGE_TAG"
