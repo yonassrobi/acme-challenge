@@ -63,6 +63,7 @@ jobs:
         run: |
            rm -rf .terraform
            terraform init -backend-config=${{ matrix.environment }}/backend.tfvars -upgrade=true -no-color -input=false
+        uses: ./
         with: 
           tf_actions_working_dir: 'terraform/'
       - name: Terraform Plan
