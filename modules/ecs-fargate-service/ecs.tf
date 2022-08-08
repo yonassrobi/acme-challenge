@@ -59,8 +59,8 @@ resource "aws_ecs_task_definition" "app" {
   container_definitions = jsonencode([
     {
       name  = "${var.project}-${var.environment}"
-      //image = "905975536748.dkr.ecr.us-east-1.amazonaws.com/acme-tech-challenge:c86e38e2"
-      image = "905975536748.dkr.ecr.us-east-1.amazonaws.com/acme-tech-challenge:b911aa4"
+      //image = "905975536748.dkr.ecr.us-east-1.amazonaws.com/acme-tech-challenge:b911aa4"
+      image = "905975536748.dkr.ecr.us-east-1.amazonaws.com/acme-tech-challenge:${var.image_tag}"
       portMappings = [
         {
           containerPort = var.port
