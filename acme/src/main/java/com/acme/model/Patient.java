@@ -1,5 +1,7 @@
 package com.acme.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,18 +16,23 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Patients")
-public class Patient {
-    @Id
+@Table(name = "Patient")
+public class Patient implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3754080050968439373L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(nullable = false)
     private Long id;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "facilitynpi", referencedColumnName = "id")
+    @JoinColumn(name = "facilityNpi", referencedColumnName = "npi")
     private Facility facility;
     
-    @Column(name = "patientidfromfacility", nullable = false)
+    @Column(name = "patientIdFromFacility", nullable = false)
     private String patientIdFromFacility;
     
 }
