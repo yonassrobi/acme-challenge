@@ -1,5 +1,10 @@
 package com.acme.request.model;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 // TODO: Auto-generated Javadoc
@@ -9,6 +14,20 @@ import lombok.Data;
 @Data
 public class PutPatientDisasterStatusInput {
 
-	private Long id;
+	/** The facility npi. */
+	private Long facilityNpi;
+	
+	/** The patient id from facility. */
+	private String patientIdFromFacility;
+	
+	/** The disaster id. */
+	private Long disasterId;
+	
+	/** The date. */
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	private LocalDateTime date;
+	
+	/** The status id. */
+	private Integer statusId;
 	
 }

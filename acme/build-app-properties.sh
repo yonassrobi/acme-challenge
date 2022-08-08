@@ -1,10 +1,16 @@
+#!/bin/bash
+DATASOURCE_URL=$1
+DATASOURCE_PASSWORD=$2
+JWT_HEADER_SECRET=$3
+
+echo '''
 #app settings
 server.port=80
 
 #docker mysql url, port changes after every build
-spring.datasource.url=jdbc:mysql://java-local-dev-db.cluster-ro-c94wvredkkiu.us-east-1.rds.amazonaws.com:3306/acme?createDatabaseIfNotExist=true
+spring.datasource.url=jdbc:mysql://'$DATASOURCE_URL':3306/acme?createDatabaseIfNotExist=true
 spring.datasource.username=skywalker
-spring.datasource.password=${replace before deployment}
+spring.datasource.password='$DATASOURCE_PASSWORD'
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 #hibernate settings
@@ -15,12 +21,8 @@ spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.properties.hibernate.generate_statistics=true
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.database-platform=org.hibernate.dialect.MySQL55Dialect
-spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 #logging.level.org.hibernate.type=trace
 #logging.level.org.hibernate.stat=debug
-
-
-spring.mvc.format.date-time=iso
 
 #actuator settings
 management.endpoints.web.exposure.include=*
@@ -28,4 +30,5 @@ management.endpoints.web.exposure.include=*
 logging.level.root=INFO
 logging.level.com.acme=INFO
 springdoc.swagger-ui.disable-swagger-default-url=true
-jwt.header.secret=${replace before deployment}
+jwt.header.secret='$JWT_HEADER_SECRET'
+''' > ./acme.deployment.properties
